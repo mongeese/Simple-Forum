@@ -1,0 +1,7 @@
+<h1>Members</h1>
+
+<% if flash[:error] %><div id="errorExplanation"><h2>User Not Found</h2><p><%= h(flash[:error]) %></p></div><% end %>
+
+<%= render :partial => 'alphasearch' %>
+
+<%= render :partial => 'member_list' %>

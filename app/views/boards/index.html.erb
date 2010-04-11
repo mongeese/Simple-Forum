@@ -1,0 +1,10 @@
+<h1>Forums</h1>
+
+<% unless @boards.empty? %>
+
+<% @boards.each do |board| %>
+<p><%= board_link(board) %></p>
+<% end
+else %>
+<p>There are no forums to display.</p>
+<% end %>

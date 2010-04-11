@@ -1,0 +1,5 @@
+<div id="search_letters">
+<% letters.each do |letter| %>
+<%= link_to letter, { :action => 'search', :terms => letter }, :class => 'search_letter' %>
+<% end %>
+</div>

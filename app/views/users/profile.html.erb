@@ -1,0 +1,33 @@
+<h1>Update Profile</h1>
+
+<% if flash[:msg] %><p><%= flash[:msg] %></p><% end %>
+<% if flash[:error] %><div id="errorExplanation"><p><%= flash[:error] %></p></div><% end %>
+
+<h2>Change Email Address</h2>
+
+<% form_for :user, :url => { :action => 'update_email' } do |form| %>
+
+<%= error_messages_for 'user', :header_message => 'Errors occurred editing your profile.' %>
+
+<ul>
+  
+  <li><%= form.label :email, 'Email Address' %> <%= form.text_field :email %></li>
+  <li><%= form.submit 'Update Email Address' %></li>
+  
+</ul>
+
+<% end %>
+
+<h2>Change Password</h2>
+
+<% form_for :user, :url => { :action => 'update_password' } do |form| %>
+
+<ul>
+  
+  <li><%= form.label :password, 'New Password' %> <%= form.password_field :password  %></li>
+  <li><%= form.label :password_confirmation, 'Confirm Password' %> <%= form.password_field :password_confirmation %></li>
+  <li><%= form.submit 'Update Password' %></li>
+  
+</ul>
+
+<% end %>

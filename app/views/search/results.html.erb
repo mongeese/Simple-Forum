@@ -1,0 +1,67 @@
+<h1><%= @title = "Search Results: #{params[:q]}" %></h1>
+
+<h2>Topics</h2>
+
+<% if not @topics or @topics.empty? %>
+<p>There are no topics to display.</p>
+<% else %>
+
+<%= will_paginate paginate_by(@topics, @posts) %>
+
+<div class="posts">
+  
+  <% @topics.each do |topic| %>
+
+  <div class="post">
+  <h3><%= topic_link(topic) %></h3>
+  
+  <div class="postinfo">
+    <p><strong><%= link_to topic.user.username, profile_link( topic.user ) %></strong></p>
+    <p><%= link_to image_tag( topic.user.gravatar_url( :size => 100 ) ), profile_link( topic.user ) %></p>
+  </div>
+
+  <div class="content">
+    <p class="meta"><%= link_to topic.created_at.to_formatted_s(:long_ordinal), "#{topic_url(topic)}" %></a></p>
+    <p><%= simple_format(topic.first_post.content) %></p>
+  </div>
+
+  </div>
+
+  <% end %>
+
+</div>
+
+<% end %>
+
+<h2>Posts</h2>
+
+<% if not @posts or @posts.empty? %>
+<p>There are no posts to display.</p>
+<% else %>
+
+<div class="posts">
+<% @posts.each do |post| %>
+  
+<div class="post" id="post-<%= post.id %>">
+  
+  <h3><%= topic_link(post.topic) %></h3>
+  
+  <div class="postinfo">
+    <p><strong><%= link_to post.user.username, profile_link( post.user ) %></strong></p>
+    <p><%= link_to image_tag( post.user.gravatar_url( :size => 100 ) ), profile_link( post.user ) %></p>
+  </div>
+  
+  <div class="content">
+    <p class="meta"><%= link_to post.created_at.to_formatted_s(:long_ordinal), "#{topic_url(post.topic)}#post-#{post.id}" %></a></p>
+    <p><%= simple_format(post.content) %></p>
+  </div>
+  
+</div>
+
+<% end %>
+
+<%= will_paginate paginate_by(@topics, @posts) %>
+
+</div>
+
+<% end %>

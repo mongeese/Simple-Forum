@@ -1,0 +1,38 @@
+<h1><%= h(@user.username) %> <% if logged_in_user_is(@user) %>(<%= link_to( 'edit', user_profile_url ) %>)<% end %></h1>
+
+<div class="block">
+
+  <div class="left">
+
+    <h2>Recently Started Topics</h2>
+
+    <% unless @topics.empty?
+    @topics.each do |topic| %>
+    <p><%= topic_link(topic) %></p>
+    <% end
+    else %>
+    <p><%= h(@user.username) %> hasn't started any topics.</p>
+    <% end %>
+
+    <h2>Recently Active Topics</h2>
+
+    <% unless @posts.empty?
+    @posts.each do |post| %>
+    <p><%= topic_link(post.topic) %></p>
+    <% end
+    else %>
+    <p><%= h(@user.username) %> hasn't made any posts.</p>
+    <% end %>
+  
+  </div>
+
+  <div class="right">
+
+    <p><%= link_to image_tag( @user.gravatar_url( :size => 100 ) ), profile_link( @user ) %></p>
+    <p><strong>Member Since:</strong> <%= @user.created_at.to_formatted_s(:long_ordinal) %></p>
+    <p><strong>Topics Created:</strong> <%= @user.topics.count %></p>
+    <p><strong>Posts Made:</strong> <%= @user.posts.count %></p>
+
+  </div>
+
+</div>

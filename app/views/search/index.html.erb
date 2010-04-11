@@ -1,0 +1,14 @@
+<h1><%= @title = 'Search' %></h1>
+
+<% if flash[:error] %><div id="errorExplanation"><p><%= flash[:error] %></p></div><% end %>
+
+<% form_tag :action => :results do |f| %>
+
+<ul>
+  
+  <li><%= text_field_tag :q %></li>
+  <li><%= submit_tag 'Search' %></li>
+  
+</ul>
+
+<% end %>

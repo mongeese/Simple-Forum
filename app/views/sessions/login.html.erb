@@ -1,0 +1,15 @@
+<h1>Login</h1>
+
+<% form_for :user do |form| %>
+
+<% if flash[:error] %><div id="errorExplanation"><h2>An error occurred logging you in.</h2><p><%= flash[:error] %></p></div><% end %>
+
+<ul>
+  <li><%= form.label :username %> <%= form.text_field :username %></li>
+  <li><%= form.label :password %> <%= form.password_field :password %></li>
+  <li><%= form.submit 'Login' %></li>
+</ul>
+
+<% end %>
+
+<p><%= link_to 'Forgotten your password?', fp_url %></p>

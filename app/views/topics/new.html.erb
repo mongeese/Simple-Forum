@@ -1,0 +1,21 @@
+<h1><%= @title = 'New Topic' %></h1>
+
+<% form_for @topic do |f| %>
+
+<%= error_messages_for 'topic' %>
+
+<ul>
+
+  <li><%= f.label :board %> <%= collection_select( :topic, :board_id, @boards, :id, :name ) %></li>
+  
+  <li><%= f.label :title %> <%= f.text_field :title %></li>
+  
+  <% f.fields_for :first_post, @topic.first_post = Post.new do |t| %>
+  <li><%= t.label :content %> <%= t.text_area :content %></li>  
+  <% end %>
+  
+  <li><%= f.submit 'Add Topic' %></li>
+  
+</ul>
+
+<% end %>

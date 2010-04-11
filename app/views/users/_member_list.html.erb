@@ -1,0 +1,13 @@
+<% unless @users.empty? %>
+
+<%= will_paginate @users %>
+
+<% @users.each do |user| %>
+<p><%= link_to user.username, profile_link( user ) %></p>
+<p><%= link_to image_tag( user.gravatar_url( :size => 100 ) ), profile_link( user ) %></p>
+<% end
+else %>
+<p>There are no users to display.</p>
+<% end %>
+
+<%= will_paginate @users %>

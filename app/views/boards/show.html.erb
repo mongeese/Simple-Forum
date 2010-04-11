@@ -1,0 +1,14 @@
+<h1><%= @board.name %></h1>
+
+<% unless @topics.empty? %>
+
+<%= will_paginate @topics %>
+
+<% @topics.each do |topic| %>
+<p><%= topic_link(topic) %></p>
+<% end
+else %>
+<p>There are no topics to display.</p>
+<% end %>
+
+<%= will_paginate @topics %>

@@ -1,0 +1,58 @@
+<h1><%= @topic.title %></h1>
+
+<div class="post" id="post-1">
+  
+  <div class="postinfo">
+    <p><strong><%= link_to @topic.user.username, profile_link( @topic.user ) %></strong></p>
+    <p><%= link_to image_tag( @topic.user.gravatar_url( :size => 100 ) ), profile_link( @topic.user ) %></p>
+  </div>
+  
+  <div class="content">
+    <p class="meta"><%= link_to @topic.created_at.to_formatted_s(:long_ordinal), "#post-1" %></a></p>
+    <p><%= simple_format(@topic.first_post.content) %></p>
+  </div>
+  
+</div>
+
+<% unless @topic.posts.empty? %>
+
+<%= will_paginate @posts %>
+
+<div class="posts">
+
+<% @posts.each do |post| %>
+<div class="post" id="post-<%= post.id %>">
+  
+  <div class="postinfo">
+    <p><strong><%= link_to post.user.username, profile_link( post.user ) %></strong></p>
+    <p><%= link_to image_tag( post.user.gravatar_url( :size => 100 ) ), profile_link( post.user ) %></p>
+  </div>
+  
+  <div class="content">
+    <p class="meta"><%= link_to post.created_at.to_formatted_s(:long_ordinal), "#post-#{post.id}" %></a></p>
+    <p><%= simple_format(post.content) %></p>
+  </div>
+  
+</div>
+
+<% end %>
+
+</div>
+<% end %>
+
+<%= will_paginate @posts %>
+
+<div id="reply">
+
+<h2>Reply To <%= @topic.title %></h2>
+
+<% form_for :post, :url => reply_topic_url(@topic) do |f| %>
+
+<ul>
+  <li><%= f.text_area :content %></li>  
+  <li><%= f.submit 'Add Post' %></li>
+</ul>
+
+</div>
+
+<% end %>
